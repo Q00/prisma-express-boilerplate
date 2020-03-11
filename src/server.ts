@@ -4,6 +4,7 @@ import { Container } from 'typedi';
 import { useContainer, useExpressServer } from 'routing-controllers';
 import morgan from 'morgan';
 import { routingControllerOptions } from './utils/routingConfig';
+import { server } from './apollo';
 
 useContainer(Container);
 const app = express();
@@ -12,6 +13,8 @@ console.log(`Current NODE_ENV is ${process.env.NODE_ENV}`);
 app.use(morgan(String(process.env.NODE_ENV)));
 
 useExpressServer(app, routingControllerOptions);
+
+server.applyMiddleware({ app, path: '/graphql' });
 export function runServer(host: string, port: number) {
   return new Promise((resolve, reject) => {
     // tslint:disable-next-line: no-any
