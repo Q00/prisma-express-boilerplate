@@ -2,13 +2,13 @@ import { IsInt, IsDate } from 'class-validator';
 
 export abstract class BaseModel {
   @IsInt()
-  id!: number;
+  id?: number;
 
   @IsDate()
-  createdAt!: Date;
+  createdAt?: Date;
 
   @IsDate()
-  updatedAt!: Date;
+  updatedAt?: Date;
 
   @IsDate()
   deletedAt?: Date | null;
