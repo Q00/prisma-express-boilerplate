@@ -1,6 +1,6 @@
-import { UserService } from '../../../services/UserService';
-import { User } from '../../../models/User';
-import { UserRepository } from '../../../contracts/UserRepository';
+import { UserService } from '../../services/UserService';
+import { User } from '../../models/User';
+import { UserRepository } from '../../contracts/UserRepository';
 test('getArticles_noArticlesInDB_emptyList', async () => {
   const userService = new UserService(new EmptyMockRepository());
   const users: User[] = await userService.getUsers();
