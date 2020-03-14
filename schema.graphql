@@ -1,0 +1,88 @@
+type Mutation {
+  createUserAccount(data: UserAccoutCreateInput!): UserAccout!
+  createUser(data: UserCreateInput!): User!
+}
+
+scalar DateTime
+
+enum Sex {
+  male
+  female
+}
+
+enum Provider {
+  kakao
+}
+
+type User {
+  id: Int!
+  nickname: String!
+  birthday: DateTime!
+  sex: Sex!
+  userPushId: String
+  userAccount: UserAccount!
+  userNfcs: [User_nfc!]!
+  routines: [Routine!]!
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+input UserCreateInput {
+  nickname: String!
+  name: String!
+  sex: Sex!
+  userPushId: String
+  userNfcs: userNfcCreateWithoutUserInput
+  routines: routineCreateWithoutUserInput
+}
+
+type UserAccount {
+  id: Int!
+  snsId: String!
+  provider: Provider!
+  user: User
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+input UserAccoutCreateInput {
+  snsId: String!
+  provider: Provider!
+}
+
+type Nfc {
+  id: Int!
+  value: String!
+  userNfc: [User_nfc!]
+  createdAt: DateTime!
+  updatedAt: DateTime
+  deletedAt: DateTime
+}
+
+input NfcCreateInput {
+  value: String!
+  userNfc: nfcCreateWithoutUserNFC
+}
+
+input nfcCreateWithoutUserNFC {
+  value: String!
+}
+
+input userNfcCreateWithoutUserInput {
+  description: String!
+  nfc: nfcCreateWithoutUserNFC
+}
+
+input userNfcCreateManyWithoutUserNfcInput {
+  connect: []
+}
+
+input UserNfcWhereUniqueInput {
+  id: Int
+  
+}
+input routineCreateWithoutUserInput {
+  name: String!
+}
